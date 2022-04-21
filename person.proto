@@ -1,0 +1,30 @@
+syntax = "proto3"; // Specify "proto3" in order for protocol buffer to run. or else will run "proto2"
+package protofiles; // package name for go compile
+option go_package = "./";
+
+// Here we created two main messages: Person & AddressBook
+// message #1
+message Person {
+  string name  = 1;
+  int32 id = 2;
+  string email = 3;
+  repeated PhoneNumber phones = 4;
+
+  enum PhoneType { // enum = arrays/lists
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+    // enum syntax is all caps. ex: MOBILE
+  }
+
+  message PhoneNumber {
+    string number = 1;
+    PhoneType type = 2;
+  }
+}
+// A Person has a name, id, email and list of PhoneNumbers.
+
+// message #2
+message AddressBook {
+  repeated Person people = 1;
+}
